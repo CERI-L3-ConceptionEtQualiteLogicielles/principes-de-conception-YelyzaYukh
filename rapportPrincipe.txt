@@ -1,22 +1,20 @@
 La classe Contact correspond à un contact téléphonique, mais elle contient également la gestion de la liste de contacts ce que ne respecte pas le principe de code Single responsibility.
 
-Une module/classe/méthode n’est responsable que d’une chose(Single responsibility)  - la classe Contact est responsable seulement pour creer, afficher le contact et pour gerer la liste c'est preferable d'avoir une autre classe
+Une module/classe/méthode n’est responsable que d’une chose(Single responsibility)
+La classe Contact ne respecte pas ce principe, car elle est responsable à la fois de la création, de l'affichage et de la modification d'un contact, ainsi que de la gestion de la liste de contacts.
+Il est préférable d'avoir une autre classe dédiée à la gestion de la liste de contacts.
 
-Don't repeat yourself (DRY - 2 fois) n'est pas respecté car dans la méthode getInfoContact est écrit la meme chose que dans la méthode toString
-YAGNY - il y a 2 methodes differents pour afficher la meme information on n'a pas besoin les 2, juste une ca va etre suffisent
+Don't repeat yourself (DRY - 2 fois) n'est pas respecté car dans la méthode getInfoContact() et dans le afficeContacts() est écrit la même chose que dans la méthode toString
+
 Un module devrait être extensible mais pas modifiable (Open/closed)
 
-Liskov substitution
+Liskov substitution pour s’assurer que les sous-classes peuvent remplacer la classe parent sans modifier son comportement attendu.
 
-Interface segregation - n'est pas segregé on a plein chose dans Interface de ContactService
-
-Dependency inversion - n'est pas respecte  les modules contenant des implémentations ne devraient jamais être directement accédés,et eux
-                        mêmes devraient dépendre d'abstractions. Donc on peut acceder aux variables de la classe.
-Static va sortir car une des principes de SOLID n'est pas respecté.
-
-Dans la méthode afficheContacts le System.out.println peut directement afficher les objets car on a la méthode to String et donc pour eviter Do not repeat yourself on enleve/elimine "Nom: " + contact.getNom() + ", Numéro: " + contact.getNumero()
-
+Interface segregation - n'est pas respecté, on a plein chose dans Interface de ContactService.
 Trop pour une interface - ceux que correspond a gestion de mail, pour l´ájout
 Les méthodes liées à la gestion des e-mails devraient être séparées dans une autre interface.
+
+Optimisation de afficheContacts():
+Dans la méthode afficheContacts() le System.out.println peut directement afficher les objets car on a la méthode toString() et donc pour eviter Do not repeat yourself on enleve/elimine "Nom: " + contact.getNom() + ", Numéro: " + contact.getNumero()
 
 La classe actuelle fait "tout et n'importe quoi". Il faut donc la refactoriser en plusieurs classes et interfaces avec des responsabilités claires et bien définies.
