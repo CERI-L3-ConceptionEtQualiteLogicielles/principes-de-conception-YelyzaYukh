@@ -18,3 +18,15 @@ Optimisation de afficheContacts():
 Dans la méthode afficheContacts() le System.out.println peut directement afficher les objets car on a la méthode toString() et donc pour eviter Do not repeat yourself on enleve/elimine "Nom: " + contact.getNom() + ", Numéro: " + contact.getNumero()
 
 La classe actuelle fait "tout et n'importe quoi". Il faut donc la refactoriser en plusieurs classes et interfaces avec des responsabilités claires et bien définies.
+
+Pour exo2 on cree une interface SendService pour gestion d'envoi.
+On crée aussi les classes necessaires pour chaque type de message possible (ServiceSendSms, ServiceSendMail,etc.).
+Chaque classe va implémenter l'intrface SendService avec la méthode envoi(Contact contact, String message) spécifiée à son cas.
+Il suffira que le service concerné par le message à traiter appelle sa propre méthode d'envoi pour appliquer la procédure adéquate.
+
+Si un autre type de message est reçu (video, par exemple), il suffit de créer une classe ServiceSend... qui implémente l'interface SendService et définit la méthode envoi(Contact contact, String message) avec un comportement adapté à son cas spécifique.
+
+Exo3
+
+Pour permettre l'envoi d'une photo avec méthode envoiPhoto qui est differente de methode principal envoi on applique le pattern Adaptor.
+Pour cela on va créer une classe AdaptorServiceEnvoiPhoto qui va instancier un objet de ServiceSendPhoto avec une override de méthode envoi qui appele la méthode de envoiPhoto
